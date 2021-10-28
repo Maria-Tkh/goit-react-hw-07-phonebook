@@ -21,7 +21,6 @@ const App = () => {
   };
   const visibleContacts = getVisibleContacts();
 
-  // const [createContact] = useCreateContactMutation();
   return (
     <div>
       <PhonebookTitle>Phonebook</PhonebookTitle>
