@@ -1,6 +1,6 @@
 import { useFetchContactsQuery, useDeleteContactMutation } from 'redux/contactsSlice';
 import { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import ContactForm from './СontactForm/СontactForm';
 import ContactList from './СontactList/СontactList';
 import Filter from './Filter/Filter';
@@ -9,8 +9,9 @@ import { PhonebookTitle, ContactTitle } from './App.styled';
 
 const App = () => {
   const { data: contacts, isFetching } = useFetchContactsQuery();
-  const [{ deleteContact = () => toast('contact is deleted') }, { isLoading: isDeleting }] =
-    useDeleteContactMutation();
+  const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
+
+  // toast('contact is deleted')
 
   const [filter, setFilter] = useState('');
   const changeFilter = e => {
