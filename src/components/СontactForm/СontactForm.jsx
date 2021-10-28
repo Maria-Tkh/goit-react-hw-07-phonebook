@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { useCreateContactMutation, useFetchContactsQuery } from 'redux/contactsSlice';
-import Loader from 'components/Loader/Loader';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { getContacts } from '../../redux/selectors';
-// import actions from '../../redux/actions';
+import toast from 'react-hot-toast';
+// import Loader from 'components/Loader/Loader';
 import { Form, Input, Button } from './СontactForm.styled';
 
 const ContactForm = () => {
@@ -33,9 +31,13 @@ const ContactForm = () => {
     e.preventDefault();
     const contactToCheck = contacts.some(contact => contact.name === name);
     if (contactToCheck) {
-      alert(`${name} is already in contacts`);
+      toast(`${name} is already in contacts`);
+      setName('');
+      setNumber('');
+      return;
     }
     createContact({ name, number });
+    toast(`${name} is added to contacts`);
     setName('');
     setNumber('');
   };
@@ -69,8 +71,9 @@ const ContactForm = () => {
         />
       </label>
       <div>
+        {/* {isLoading && <Loader />} */}
         <Button type="submit" disabled={isLoading}>
-          {isLoading && <Loader />}Add contact
+          Add contact
         </Button>
       </div>
     </Form>
